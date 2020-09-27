@@ -270,7 +270,6 @@ return "redirect:/login";
     public String reservation(Model model){
         return "reservation";
     }
-
     @RequestMapping(value="/announcements", method={RequestMethod.POST,RequestMethod.GET})
     public String announcements(Model model){
         return "announcements";
