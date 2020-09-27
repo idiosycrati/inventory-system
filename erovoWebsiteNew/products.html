@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="materialize/css/materialize.min.css"><script type="text/javascript" src="jquery.min.js"></script>
+    <script src="materialize/js/materialize.min.js"></script>
+    <title>Document</title>
+    <link href="css/input.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    
+</head>
+<body>
+    <div class="wrapper">
+        <div class="sidebar">
+          <div class="bg_shadow"></div>
+            <div class="sidebar__inner">
+               <div class="close">
+              <i class="fas fa-times"></i>
+            </div>
+            <div class="profile_info">
+                <div class="profile_img">
+                  <img src="photos/profile.jpg" alt="profile_img">
+                </div>
+                <div class="logo_img">
+                    <img src="photos/logo.png" alt="logo_img">
+                  </div>
+                <div class="profile_data">
+                    <p class="name">ADMIN</p> 
+                    <a href="#" class="pLinks">Edit Profile</a>
+                    <a href="#" class="pLinks">View Accounts</a>
+               
+                </div>
+            </div>
+            <ul class="siderbar_menu">
+              <li> <a th:href="@{/dashboard}">
+                <div class="icon"><i class="sideLinks"></i></div>
+                <div class="title">Dashboard</div>
+                </a></li>  
+              <li><a th:href="@{/announcements}">
+                  <div class="icon"><i class="sideLinks"></i></div>
+                  <div class="title">announcements</div>
+                  </a></li>  
+            <li><a th:href="@{/inventory}">
+                <div class="icon"><i class="sideLinks"></i></div>
+                <div class="title">inventory</div>
+                </a></li>  
+            <li><a th:href="@{/reservation}">
+                <div class="icon"><i class="sideLinks"></i></div>
+                <div class="title">reservations</div>
+                </a></li>  
+           <li><a th:href="@{/products}">
+                  <div class="icon"><i class="sideLinks"></i></div>
+                  <div class="title">products</div>
+                 </a></li>  
+            <li><a th:href="@{/dashboard}">
+                <div class="icon"><i class="sideLinks"></i></div>
+                <div class="title">cms</div>
+                </a></li>  
+          </ul>
+          </div>
+        </div>
+        
+    <div class="main_container">
+    
+      
+      <div class="container">
+        <div class="item">
+          <form th:action="@{/addProduct}" 
+          method="POST" 
+          enctype="multipart/form-data" 
+          th:object=${product}  id="myForm">
+                    <div class="row">
+                <div class="input-field col s4">
+                    <input id="last_name" type="text" class="validate" name="productName">
+                    <label for="last_name">Product Name</label>
+                  </div>
+                  <div class="input-field col s4">
+                    <input id="price" type="text" class="validate" name="productPrice">
+                    <label for="price">Price</label>
+                  </div>
+                  <div class="input-field col s4">
+                    <input id="quantity" type="text" class="validate" name="remainingQuantity" >>
+                    <label for="quantity">Quantity</label>
+                  </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s9">
+                <textarea name="productDescription" form="myform" id="styled"  class="productDesc" onfocus="this.value=''; setbg('#e5fff3');" onblur="setbg('white')" placeholder="Product Description"></textarea>
+            </div>
+            <div class="input-field col s3">
+                <!-- <a class="waves-effect waves-light btn" id="buttons"><i class="material-icons left">collections</i>Add Media</a>  -->
+                
+                <br>
+                <!-- <a class="waves-effect waves-light btn" id="buttons"><i class="material-icons left">edit</i>Post Product</a> -->
+                
+            </div>
+        </div>
+        <input type="file" name="imageFile" accept="image/*">Add Media
+        <input type="submit" class="btn btn-success">Post Product</button>
+              </form>
+        </div>
+       
+      </div>
+      
+    </div>
+</div>
+</body>
+<script>
+    $(document).ready(function(){
+    $('.timepicker').timepicker();
+  });
+</script>
+<script>
+ $(document).ready(function(){
+    $('.datepicker').datepicker();
+  });
+</script>
+</html>

@@ -1,0 +1,1 @@
+docker exec -it db_slave sh -c "mysql -uroot -phatdog";

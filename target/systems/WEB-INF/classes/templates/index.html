@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Erovoutika</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+ 
+    <style>
+        .card{
+            background-color: blue;
+            width: 150px;
+            height: 150px;
+            padding: 20px;
+            margin: 5px;
+        }
+        
+        .card-title{
+            font-size: 30px;
+            color: white;
+            padding: 5px;
+        }
+        .card-price{
+            font-size: 20px;
+            color: red;
+            padding: 5px;
+
+        }
+        .bttn{
+            padding: 5px;
+        }
+
+        .cart{
+            margin: 20px;
+            background-color: blue;
+            max-width: 300px;
+            padding:5px;
+            display: inline-block;
+        }
+        .cart:hover .items{
+            min-height: 200px;
+            display: inline-block;
+        }
+        li{
+            list-style-type: none;
+            position: relative;
+            right: 30px;
+        }
+
+        .items{
+            display: none;
+        }
+    </style>
+
+</head>
+
+<body>
+    <script>
+        function addToCart(myid)
+    		{
+                var q = $("#quan"+myid).val(); 
+                console.log(q);
+    		 $.ajax({
+    			  type: 'get',
+    			  url: "addToCart?productId="+myid+"&productQuantity="+q,
+    			  success: function(data){
+    				  $('#cartList').html(data);
+    				},
+    			})	
+    		}
+    </script>
+    <span th:if="${#authentication.name != 'anonymousUser'}">Not Logged In
+		<span sec:authentication="name">Username</span> 
+	
+    <div id="prods">
+        <ul style="display: inline-flex;">
+            <li th:each="prod : ${product}">
+            <div class="card">
+            <div class="card-title" th:text=${prod.productDescription}>
+            </div>
+            <span class="card-price" th:text=${prod.productPrice}>P355</span>
+            <!-- <span class="card-price" th:text="'quan'+${prod.id}">P355</span> -->
+                Quantity<input type="number" class='testInput' th:id="'quan'+${prod.id}"  style="width:40px;" min="1" th:max=${prod.remainingQuantity} name="productQuantity">
+                <!-- <input type="hidden" id="custId" name="productId" th:value="${prod.id}"> -->
+                <button class="bttn" type="button" th:onclick="'javascript:addToCart(' + ${prod.id} +')'">Add to Cart</button>
+        </div>
+            </li>
+        </ul>
+    </div>
+    <div class="cart">
+        <div class="card-title">CART</div>
+        <div class="items">
+        <ul id="cartList">
+            <li class="item" th:each="cart : ${thecart}"><div class="tn"><img src="7.jpg" width="30px" th:text=${cart.productDescription}></div></li>
+            <a th:href="@{/cartOrder}"><button class="bttn" >Order Now</button></a>        </ul>
+        
+        </div>
+        
+
+    </div>
+</span>
+<center>
+<table>
+		<caption>Post List</caption>
+		<tr>
+			<th>Post</th>
+		
+		</tr>
+		<tr th:each="posts : ${posts}">
+            <td th:text="${posts.postCaption}">Onions</td>
+		  </tr>
+	</table>
+</center>
+
+</body>
+</html>

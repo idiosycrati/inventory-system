@@ -1,0 +1,2 @@
+  CREATE USER 'root'@'%' IDENTIFIED BY 'hatdog';
+  GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION; 

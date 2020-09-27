@@ -1,0 +1,1 @@
+docker run --name db_slave -e MYSQL_ROOT_PASSWORD=hatdog --net=groupnet -p 3307:3306 -v /var/mysql/slave:/var/lib/mysql db_slave

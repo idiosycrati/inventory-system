@@ -1,0 +1,1 @@
+docker run --name db_master -e MYSQL_ROOT_PASSWORD=hatdog --net=groupnet -p 3306:3306 -v /var/mysql/master:/var/lib/mysql  db_master

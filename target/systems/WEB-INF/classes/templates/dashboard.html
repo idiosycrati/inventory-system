@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+	<title>Dashboard</title>
+	<style type="text/css">
+		table, td, th{
+			 border: 1px solid black;
+		}
+				
+		th, td {
+		  padding: 5px;
+		  text-align: left;
+		}
+	</style>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/bootstrap-theme.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="../css/cents.css" type="text/css" >
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<body>
+	<span th:if="${#authentication.name == 'anonymousUser'}">Not Logged In
+		<span sec:authentication="name">Username</span> 
+	</span>
+	<script>
+		// Fill Modal
+		function postmessage() {
+			console.log($("#theId").val());
+
+		$.ajax({
+				type: "Get",
+				url: "thecall?productId="+$("#theId").val(),
+				cache: false,
+				data:'productId=' + $("#theId").val(),
+				
+				success:
+				updateProductList(),
+ function(response){
+				var obj = JSON.stringify(response);
+				console.log(obj);	
+				console.log(response);		
+				$('#myAjax').val(response.productDescription);
+},
+error: function(data){
+	console.log(data);
+	// console.log("hayop");
+	$('#myAjax').val($("#theId").val());
+	
+alert('Error while request..');
+}
+});
+		}
+		
+
+		// UPDATE FRAGMENT
+function updateProductList(myid)
+    		{
+    			
+    		 $.ajax({
+    			  type: 'get',
+    			  url: "upProductList?productId="+myid,
+    			  success: function(data){	  
+    				  $('#productList').html(data);
+    				},
+    			})
+    		}
+	</script>
+	<div sec:authorize="hasRole('ADMIN')">Text visible to admin inventory shit
+        <center>
+			<div class="table-responsive " >
+	<table id="productList">
+		<caption>Inventory</caption>
+		<tr>
+			<th>Product no.</th>
+			<th>Name/Description</th>
+			<th>Price</th>
+			<th>Remaining Quantity</th>
+			<th>Image</th>
+			<th>Add</th>
+			<th>Deduct</th>
+				<th>Remove</th>
+			<th>Edit</th>
+		</tr>
+		<tr th:each="prod : ${product}"  >
+			<!-- <input type="text" id="theId" name="custId" th:value="${prod.id} "> -->
+			<td th:text="${prod.id}">Onions</td>
+			<td th:text="${prod.productDescription}">Onions</td>
+			<td th:text="${prod.productPrice}">2.41</td>
+			<td th:text="${prod.remainingQuantity}">
+			<td><a th:href="@{${'/photos/'+prod.productImageLocation}}"><img th:src="@{${'/images/products/'+prod.productImageLocation}}" alt="Photo upload confirmation" style="width:60px"></a></td>	
+			<td><button class="btn btn-success" id="inc" >+</button></td>
+			<td><button id="dec">-</button></td>
+			<td><a th:href="@{/productDelete(productId=${prod.id})}">DELETE</a></td>
+			<td><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" th:data-id=${prod.id} th:onclick="'javascript:updateProductList(' + ${prod.id} +')'">EDIT</button></td>
+		  </tr>
+<!-- 		
+		<tr>
+			<td>01</td>
+			<td>Ultrasonic Sensor</td>
+			<td>120</td>
+			<td id="num">17</td>
+			<td><button id="inc" onclick="increment()">+</button></td>
+			<td><button id="dec">-</button></td>
+			<td><button>x</button></td>
+			<td><button>#</button></td>
+		</tr> -->
+
+	</table>
+			</div>
+	<div id="myModal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+	<div class="modal-content">
+		<div class="modal-header">
+		  <button type="button" class="close" data-dismiss="modal">&times;</button>
+		  <h4 class="modal-title">Modal Header</h4>
+		</div>
+		<div class="modal-body">
+		  <p>Some text in the modal.</p>
+		  <input type="text" id="myAjax">
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		</div>
+	  </div>
+  
+	</div>
+  </div>
+	<!-- <center>
+		<table>
+				<caption>Post List</caption>
+				<tr>
+					<th>Post</th>
+				
+				</tr>
+				<tr th:each="posts : ${posts}">
+					<td th:text="${posts.postCaption}">Onions</td>
+					<td><a th:href="@{/archivePost(postId=${posts.id})}">Archive</a></td>
+				  </tr>
+			</table>
+		</center>
+</center>
+<center>
+	<div th:if="${invalidFileType != null}" class="alert alert-danger notification" role="alert">
+		<p>Not a Valid Picture</p>
+	</div>
+	<table>
+		<caption>Add Product</caption>
+		<tr>
+			 <th>Product no.</th> 
+			<th>Name/Description</th>
+			<th>Price</th>
+			<th>Current Quantity</th>
+		</tr>
+		<form th:action="@{/addProduct}" 
+			method="POST" 
+			enctype="multipart/form-data" 
+			th:object=${product} >
+		<tr>
+		<div th:if="${resub == null}">
+           <td><input type="text" name="productNumber"></td> 
+			<td><input type="text" name="productDescription"></td>
+			<td><input type="text" name="productPrice" ></td>
+			<td><input type="text" name="remainingQuantity" ></td>
+			<td><input type="file" name="imageFile" accept="image/*"></td>
+			<td><input type="submit" class="btn btn-success">Add Product</button></td>
+		</div>
+		
+      /* If the product has no image, display default Image. 
+        <div class="img-container" th:unless="${resub == null}">
+			<td><input type="text" name="productDescription" th:value="${resub.productDescription}"></td>
+			<td><input type="text" name="productPrice" th:value="${resub.productPrice}"></td>
+			<td><input type="text" name="remainingQuantity"  th:value="${resub.remainingQuantity}"></td>
+			<td><input type="file" name="imageFile" accept="image/*"></td>
+			<td><input type="submit" class="btn btn-success">Add Product</button></td>
+        </div>
+		</tr>
+	</form>
+	</table>
+
+	<table>
+		<caption>Add Schedules</caption>
+		<tr>
+			<th>Caption</th>
+			<th>Date</th>
+			<th>Time</th>
+		</tr>
+		<form th:action="@{/createSchedule}" method="POST" th:object="${schedule}">
+		<tr>
+		<div>
+			<td><input type="text"  id="caption" name="caption" ></td>
+			<td><input type="date" id="schedDate" name="schedDate"></td>
+			<td><input type="time" id="schedTime" name="schedTime" ></td>
+			<td><input type="submit" class="btn btn-success">Create Schedule</button></td>
+		</div>
+		</tr>
+	</form>
+	</table>
+	<table>
+		<caption>Add Post</caption>
+		<tr>
+		j<th>Product no.</th> 
+			<th>Caption</th>
+			<th>Banner</th>
+	
+		</tr>
+		<form th:action="@{/addPost}" 
+			method="POST" 
+			enctype="multipart/form-data" 
+			th:object=${post} >
+		<tr>
+		<div>
+			<td><input type="text" name="postCaption"></td>
+			<td><input type="file" name="imageFile" accept="image/*"></td>
+			<td><input type="submit" class="btn btn-success">Create Post</button></td>
+		</div>
+		</tr>
+	</form>
+	</table>
+	
+</center> -->
+		<form th:action="@{/logout}" method="post">
+		<button type="submit" class="btn btn-success">Logout</button>
+	</form>
+		</div>
+</body>
+</html>

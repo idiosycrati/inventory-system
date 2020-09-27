@@ -1,0 +1,1 @@
+docker exec -it db_master sh -c "mysql -uroot -phatdog" ;

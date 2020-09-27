@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+    <html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Erovoutika</title>
+</head>
+<body>
+    User Login
+    <form th:action="@{/v2}" 
+    method="POST" class="form-horizontal">
+   
+   <!-- Place for messages: error, alert etc ... -->
+   <div class="form-group">
+      <div class="col-xs-15">
+          <div>
+          
+              <!-- Check for login error -->
+          
+              <div th:if="${param.error}">
+                  
+                  <div class="alert alert-danger col-xs-offset-1 col-xs-10">
+                      Invalid username and password.
+                  </div>
+   
+              </div>
+                  
+              <!-- Check for logout -->
+   
+              <div th:if="${param.logout}">
+                              
+                  <div class="alert alert-success col-xs-offset-1 col-xs-10">
+                      You have been logged out.
+                  </div>
+              </div>
+          </div>
+      </div>
+   </div>
+   
+   <!-- User name -->
+   <div style="margin-bottom: 25px" class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span> 
+      
+      <input type="text" name="email" placeholder="email" class="form-control">
+   </div>
+   
+   <!-- Password -->
+   <div style="margin-bottom: 25px" class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span> 
+      
+      <input type="password" name="password" placeholder="password" class="form-control"  >
+
+      <!-- minlength="8" maxlength="16" -->
+   </div>
+   
+   <!-- Login/Submit Button -->
+   <div style="margin-top: 10px" class="form-group">						
+      <div class="col-sm-6 controls">
+          <button type="submit" class="btn btn-success">Login</button>
+      </div>
+   </div>
+   <br>
+   <br>
+   
+   </form>
+   <!-- <div th:text="${#authentication.name}  ?:    'Login'"></div> -->
+   <span th:if="${#authentication.name == 'anonymousUser'}"></span>
+   <form th:action="@{/reg}" 
+    method="POST" class="form-horizontal" th:object="${user}">
+   <!-- Place for messages: error, alert etc ... -->
+   <div class="form-grou">
+  
+      <div class="col-xs-15">
+          <div>
+          
+              <!-- Check for login error -->
+          
+              <!-- <div th:if="${param.error}">
+                  
+                  <div class="aler alert-danger col-xs-offset-1 col-xs-10">
+                      Invalid username and password.
+                  </div>
+   
+              </div> -->
+                  
+              <!-- Check for logout -->
+   
+              <div th:if="${param.logout}">
+                               <div th:text="${#authentication.name}  ?: 'Login'"></div>
+                  <div class="alert-success col-xs-offset-1 col-xs-10">
+                      You have been logged out.
+                  </div>
+              </div>
+          </div>
+      </div>
+   </div>
+   <div th:if="${existedUsername != null}" class="alert alert-danger notification" role="alert">
+    <p>User Already Exist</p>
+ </div>
+   <div style="margin-bottom: 25px" class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span> 
+    <input type="email" name="email"  placeholder="email" class="form-control">
+ </div>
+ <!-- <p class="alert alert-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p> -->
+ <div style="margin-bottom: 25px" class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span> 
+    <input type="password" name="password" placeholder="username" class="form-control">
+
+   
+ 
+ </div>
+
+ <div style="margin-top: 10px" class="form-grou">		
+    <div class="col-sm-6 controls">
+        <button type="submit" class="btn btn-success">Register</button>
+    </div>
+ </div>
+
+ 
+   </form>
+</body>
+</html>
