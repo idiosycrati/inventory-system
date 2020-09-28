@@ -1,119 +1,163 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org">
+<!-- <html lang="en"> -->
+<html xmlns:th="https://www.thymeleaf.org"></html>
 <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Erovoutika</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-    <script src='main.js'></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="front.css">
+    <!-- Compiled and minified CSS -->
+ <script type = "text/javascript" src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>   
+<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
  
-    <style>
-        .card{
-            background-color: blue;
-            width: 150px;
-            height: 150px;
-            padding: 20px;
-            margin: 5px;
-        }
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link rel = "stylesheet"
+    href = "https://fonts.googleapis.com/icon?family=Material+Icons">
+ <link rel = "stylesheet"
+    href = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
         
-        .card-title{
-            font-size: 30px;
-            color: white;
-            padding: 5px;
-        }
-        .card-price{
-            font-size: 20px;
-            color: red;
-            padding: 5px;
+ <script src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js">
+ 
+  
+ </script> 
+ <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script> <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script> -->
 
-        }
-        .bttn{
-            padding: 5px;
-        }
 
-        .cart{
-            margin: 20px;
-            background-color: blue;
-            max-width: 300px;
-            padding:5px;
-            display: inline-block;
-        }
-        .cart:hover .items{
-            min-height: 200px;
-            display: inline-block;
-        }
-        li{
-            list-style-type: none;
-            position: relative;
-            right: 30px;
-        }
 
-        .items{
-            display: none;
-        }
-    </style>
 
+    <title>systems</title>
+  
 </head>
-
 <body>
-    <script>
-        function addToCart(myid)
-    		{
-                var q = $("#quan"+myid).val(); 
-                console.log(q);
-    		 $.ajax({
-    			  type: 'get',
-    			  url: "addToCart?productId="+myid+"&productQuantity="+q,
-    			  success: function(data){
-    				  $('#cartList').html(data);
-    				},
-    			})	
-    		}
-    </script>
-    <span th:if="${#authentication.name != 'anonymousUser'}">Not Logged In
-		<span sec:authentication="name">Username</span> 
-	
-    <div id="prods">
-        <ul style="display: inline-flex;">
-            <li th:each="prod : ${product}">
-            <div class="card">
-            <div class="card-title" th:text=${prod.productDescription}>
-            </div>
-            <span class="card-price" th:text=${prod.productPrice}>P355</span>
-            <!-- <span class="card-price" th:text="'quan'+${prod.id}">P355</span> -->
-                Quantity<input type="number" class='testInput' th:id="'quan'+${prod.id}"  style="width:40px;" min="1" th:max=${prod.remainingQuantity} name="productQuantity">
-                <!-- <input type="hidden" id="custId" name="productId" th:value="${prod.id}"> -->
-                <button class="bttn" type="button" th:onclick="'javascript:addToCart(' + ${prod.id} +')'">Add to Cart</button>
-        </div>
-            </li>
-        </ul>
+
+
+
+ <script>
+  $(".dropdown-trigger").dropdown();
+</script>
+
+
+ <nav>
+    <div class="nav-wrapper  grey darken-1">
+      <a href="#" class="brand-logo">Logo</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <!-- <li><a href="sass.html">Sass</a></li> -->
+        <!-- <li><a href="badges.html">Components</a></li> -->
+        <li><a href="collapsible.html"><i class="large material-icons">add_shopping_cart</i></a></li>
+      </ul>
     </div>
-    <div class="cart">
-        <div class="card-title">CART</div>
-        <div class="items">
-        <ul id="cartList">
-            <li class="item" th:each="cart : ${thecart}"><div class="tn"><img src="7.jpg" width="30px" th:text=${cart.productDescription}></div></li>
-            <a th:href="@{/cartOrder}"><button class="bttn" >Order Now</button></a>        </ul>
+  </nav>
+
+
+
+
+
+<header>
+
+</header>
+<main>
+     <div class="tags">
+         <h4>Products</h4>
+     </div>      
+     <hr>
+<div>
+
+</div>
+
+
+   <div class="mcontainer">
+       <div class="content">
         
+           
+    
+<div class="row">
+
+
+ <div class="col s12 m6">
+
+
+
+
+      <div class="card small">
+        <div class="card-image  ">
+          <img src="sample-1.jpg" class="activator">
+          <span class="card-title">Card Title</span>
         </div>
-        
+        <div class="card-content">
+          <p>I am a very simple card. I am good at containing small bits of information.
+          I am convenient because I require little markup to use effectively.</p>
+        </div>
+ <div class="card-reveal">
+      <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+      <p>Here is some more information about this product that is only revealed once clicked on.</p>
+    </div>
+        <div class="card-action">
+          <a href="#">This is a link</a>
+        </div>
+    </div>
+
+    
+ 
+
+
+
+
+
+
+
+
+
+
+  </div>
 
     </div>
-</span>
-<center>
-<table>
-		<caption>Post List</caption>
-		<tr>
-			<th>Post</th>
-		
-		</tr>
-		<tr th:each="posts : ${posts}">
-            <td th:text="${posts.postCaption}">Onions</td>
-		  </tr>
-	</table>
-</center>
+
+</div>
+       </div>
+
+
+       
+<div>
+<h4 class="tags">News</h4>
+</div>
+<hr>
+
+
+      
+
+</div>
+</main> 
+
+<footer class="page-footer grey darken-1 ">
+    
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">Footer Content</h5>
+          <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+        </div>
+        <div class="col l4 offset-l2 s12">
+          <h5 class="white-text">Links</h5>
+          <ul>
+            <li>Link 1</li>
+            <li>Link 2</li>
+            <li>Link 3</li>
+            <li>Link 4</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+      © 2020 Copyright Text
+      More Links
+      </div>
+    </div>
+  </footer>
+
+
+
 
 </body>
 </html>

@@ -1,0 +1,68 @@
+  body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1 0 auto;
+  }
+  .card{
+    /* display: kk !important; */
+    margin-right: 3% !important;
+  }
+ .content{
+
+    /* height: 100% !importanti; */
+    border: 1px black solid;
+    width: 100% !important;
+    display: flex;
+    grid-row: 2;
+    padding-left: 1%;
+    padding-right: 1%;
+    flex-wrap: wrap;
+    flex-flow: row wrap;
+ }
+
+ .dropdown-content {
+  background-color: #FFFFFF;
+  margin: 0;
+  display: none;
+  min-width: 300px; /* Changed this to accomodate content width */
+  max-height: auto;
+	margin-left: -1px; /* Add this to keep dropdown in line with edge of navbar */
+  overflow: hidden; /* Changed this from overflow-y:auto; to overflow:hidden; */
+  opacity: 0;
+  position: absolute;
+  white-space: nowrap;
+  z-index: 1;
+  will-change: width, height;
+}
+
+
+
+.mcontainer{
+
+    height: max-content !important; 
+    display: flex !important;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto auto auto;
+    /* margin-left: 0% !important;
+ margin-right: 0% !important;
+ width: 2000px !important; */
+
+}
+.page-footer{
+margin-top: 0% !important;
+grid-column: 1/ span 3;
+grid-row: 3;
+
+}
+.center-cols > .col {
+  float:none; /* disable the float */
+  display: inline-block; /* make blocks inline-block */
+  text-align: initial; /* restore text-align to default */
+}
+.tags{
+    margin-left: 5%;
+}

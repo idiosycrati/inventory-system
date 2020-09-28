@@ -79,57 +79,43 @@ public class SystemDAOB implements SystemDAO {
     @Override
     @Transactional
     public void saveProduct(MultipartFile imageFile, products product) {
-        // TODO Auto-generated method stub
-
         Session currentSession = entityManager.unwrap(Session.class);
-        // authorities auth = new authorities();
-        // auth.setAuthority("ROLE_USER");
-        //
         final Logger log = LoggerFactory.getLogger(SystemsApplication.class);
         Path currentPath = Paths.get("home");
         log.error(currentPath.toString() + " cPath");
-        // String folder = "/photos/";
-        // Path absolutePath = currentPath.toAbsolutePath();
         product.setProductImageLocation(imageFile.getOriginalFilename());
         byte[] bytes;
 
         try {
             bytes = imageFile.getBytes();
-            // /src/main/resources/static/images/products/
-            // log.error(absolutePath.toString());
-            // "/src/main/resources/static/images/products/" + imageFile.getOriginalFilename()
             Path path = Paths.get("").toAbsolutePath();
              String temp=path.toString()+"/src/main/resources/static/images/products/" + imageFile.getOriginalFilename();
             Files.write(Paths.get(temp).toAbsolutePath(), bytes);
            
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
-        // "{bcrypt}"+
-        // user.setAuthority(auth);
-        // save employee
         currentSession.saveOrUpdate(product);
 
     }
+
 
     @Override
     @Transactional
     public List<products> findAllProducts() {
 
-        // TODO Auto-generated method stub
         Session currentSession = entityManager.unwrap(Session.class);
         Query<products> query = currentSession.createQuery("from products");
         List<products> productList = query.getResultList();
         log.error(productList.toString());
         return productList;
+
     }
 
     @Override
     @Transactional
     public products findProductById(int theId) {
-        // TODO Auto-generated method stub
+
         Session currentSession = entityManager.unwrap(Session.class);
         Query<products> query = currentSession.createQuery("from products where id=" + theId);
         products theProduct = query.getSingleResult();
@@ -140,7 +126,7 @@ public class SystemDAOB implements SystemDAO {
     @Override
     @Transactional
     public void productDeleteById(int theId) {
-        // TODO Auto-generated method stub
+
         Session currentSession = entityManager.unwrap(Session.class);
         String hql = "DELETE FROM products WHERE id = :theId";
         Query query = currentSession.createQuery(hql);
@@ -158,7 +144,7 @@ public class SystemDAOB implements SystemDAO {
     @Override
     @Transactional
     public userModel findUserByEmail(String email) {
-        // TODO Auto-generated method stub
+
         Session currentSession = entityManager.unwrap(Session.class);
         Query<userModel> query = currentSession.createQuery("from userModel where email= :email");
         log.info("adding: " + email);
@@ -175,7 +161,7 @@ public class SystemDAOB implements SystemDAO {
     @Override
     @Transactional
     public void updateCart(String email, int id,int quantity) {
-        // TODO Auto-generated method stub
+
         Session currentSession = entityManager.unwrap(Session.class);
         userModel theUser = findUserByEmail(email);
         products theProduct = findProductById(id);
@@ -315,7 +301,7 @@ public class SystemDAOB implements SystemDAO {
             query.getSingleResult();
             return true;
         } catch (Exception e) {
-            //TODO: handle exception
+            
             return false;
         }
          

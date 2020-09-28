@@ -65,19 +65,23 @@ public class MainController{
 
     }
     @RequestMapping("/")
-    public String index(Model model,Principal pr){
-        List<products> product = systemServiceImplementation.findAllProducts();
+    public String index(Model model,Principal principal){
+        List<products> products = systemServiceImplementation.findAllProducts();
         List<PostEntity> posts = systemServiceImplementation.findAllPost();
-        if (pr!=null) {
-            List<TheCart>cart = systemServiceImplementation.cartList(pr.getName());
-            model.addAttribute("thecart", cart);
+        if (principal!=null) {
+            List<TheCart>cart = systemServiceImplementation.cartList(principal.getName());
+            model.addAttribute("cart", cart);
         }
-        model.addAttribute("product",product);
+        model.addAttribute("products",products);
         model.addAttribute("posts", posts);
         return "index";
 
 
     };
+
+
+
+
     @RequestMapping(value="/login", method={RequestMethod.POST,RequestMethod.GET})
     public String login( ) {
 
@@ -88,9 +92,9 @@ public class MainController{
     
     @RequestMapping(value="/dashboard", method={RequestMethod.POST,RequestMethod.GET})
     public String dashboard(Model model){
-        List<products> prod = systemServiceImplementation.findAllProducts();
+        List<products> products = systemServiceImplementation.findAllProducts();
         List<PostEntity> posts = systemServiceImplementation.findAllPost();
-        model.addAttribute("product",prod);
+        model.addAttribute("product",products);
         model.addAttribute("schedule", new ScheduleEntity());
         model.addAttribute("posts",posts);
         return "admin";
@@ -98,15 +102,16 @@ public class MainController{
 
     @RequestMapping(value="/inventory", method={RequestMethod.POST,RequestMethod.GET})
     public String inventory(Model model){
-        List<products> prod = systemServiceImplementation.findAllProducts();
+        List<products> products = systemServiceImplementation.findAllProducts();
         List<PostEntity> posts = systemServiceImplementation.findAllPost();
-        model.addAttribute("product",prod);
+        model.addAttribute("products",products);
         model.addAttribute("schedule", new ScheduleEntity());
         model.addAttribute("posts",posts);
         return "inventory";
     }
+// TODO: PUT CODES IN SERVICE LAYER
 
-    @PostMapping("/addProduct")
+@PostMapping("/addProduct")
     public String addProduct(@Valid products product,@RequestParam("imageFile") MultipartFile imageFile,Model model){
         product.setId(0);
         try {
@@ -131,7 +136,9 @@ public class MainController{
         return "redirect:/dashboard";
     }
 
-    @PostMapping("/reg")
+//TODO: PUT CODES IN SERVICE LAYER
+ 
+    @PostMapping("/register")
 	public String addEmployee(@ModelAttribute("user") @Valid final userModel user, final ModelMap model, final BindingResult result) {
         model.addAttribute("user", user);
         try {
@@ -181,7 +188,7 @@ return "redirect:/login";
 
     @GetMapping("/cartOrder")
 	public String cartOrder(
-   
+
         Model theModel,Principal pr) {
 
         systemServiceImplementation.cOrder(pr);
@@ -233,6 +240,7 @@ return "redirect:/login";
     }
 
 
+    // AJAX CALL DEMO
     @GetMapping("/thecall")
 	public ResponseEntity<?> aCall(
         @RequestParam("productId") int theId,
@@ -243,8 +251,11 @@ return "redirect:/login";
      return new ResponseEntity<>(result,HttpStatus.OK);
                                       
     }
-    @GetMapping("/upProductList")
-	public String refreshProductList(
+
+
+    // RETURN FRAGMENTS UPDATED PRODUCT LIST FRAGMENT
+    @GetMapping("/updateProductList")
+	public String updateProductList(
         @RequestParam("productId") int theId,
                                     Model theModel
                                     ) {
@@ -266,10 +277,13 @@ return "redirect:/login";
         return "products";
     }
 
+
     @RequestMapping(value="/reservation", method={RequestMethod.POST,RequestMethod.GET})
     public String reservation(Model model){
         return "reservation";
     }
+
+
     @RequestMapping(value="/announcements", method={RequestMethod.POST,RequestMethod.GET})
     public String announcements(Model model){
         return "announcements";
