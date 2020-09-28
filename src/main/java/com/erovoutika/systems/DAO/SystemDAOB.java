@@ -165,6 +165,9 @@ public class SystemDAOB implements SystemDAO {
         Session currentSession = entityManager.unwrap(Session.class);
         userModel theUser = findUserByEmail(email);
         products theProduct = findProductById(id);
+
+        // FIXME: FETCH CART OF THE SPECIFIC USER NOT THE CART AS A WHOLE
+
         if (existInCart(id)) {
             CartEntity temp =fetchCart(id);
             temp.setId(temp.getId());
@@ -301,7 +304,7 @@ public class SystemDAOB implements SystemDAO {
             query.getSingleResult();
             return true;
         } catch (Exception e) {
-            
+
             return false;
         }
          
@@ -315,7 +318,6 @@ public class SystemDAOB implements SystemDAO {
         query.setParameter("prod", findProductById(productId));
         CartEntity theProduct = query.getSingleResult();
         return theProduct;
-
        
     }
 

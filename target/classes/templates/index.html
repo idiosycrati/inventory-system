@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="front.css">
+    <link rel="stylesheet" href="css/front.css">
     <!-- Compiled and minified CSS -->
  <script type = "text/javascript" src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>   
 <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
@@ -44,7 +44,9 @@
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <!-- <li><a href="sass.html">Sass</a></li> -->
         <!-- <li><a href="badges.html">Components</a></li> -->
-        <li><a href="collapsible.html"><i class="large material-icons">add_shopping_cart</i></a></li>
+       
+        <li><a href="#">Cart<span class="badge white-text">14 </span></a></li>
+     
       </ul>
     </div>
   </nav>
@@ -73,29 +75,58 @@
     
 <div class="row">
 
-
- <div class="col s12 m6">
-
+  
 
 
+    <div th:if="${#lists.size(products)}==0">
 
-      <div class="card small">
-        <div class="card-image  ">
-          <img src="sample-1.jpg" class="activator">
-          <span class="card-title">Card Title</span>
-        </div>
-        <div class="card-content">
-          <p>I am a very simple card. I am good at containing small bits of information.
-          I am convenient because I require little markup to use effectively.</p>
-        </div>
- <div class="card-reveal">
-      <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-      <p>Here is some more information about this product that is only revealed once clicked on.</p>
+      <div class="col s12 m6">
+        <div class="card large">
+          <div class="card-image">
+            <img th:src="@{images/p1.jpeg}"/>
+            <span class="card-title">No available products at the moment!</span>
+          </div>
+          <div class="card-content">
+            <p>Thanks for visiting supplies will be restocked soon.</p>
+          </div>
+   </div>
+      </div>
     </div>
-        <div class="card-action">
-          <a href="#">This is a link</a>
-        </div>
+
+   <!-- ELSE -->
+   <div th:unless="${#lists.size(products)}==0">
+
+ 
+<!-- <th:block th:object="${products}"> -->
+ <div class="col s12 m6" th:each=" product : ${products} " >
+
+
+  <div class="card small">
+    <div class="card-image">
+      <img th:src="@{images/p1.jpeg}">
+      <span class="card-title" th:text="${product.productName}"></span>
     </div>
+    <div class="card-content">
+      <p>I am a very simple card. I am good at containing small bits of information.
+      I am convenient because I require little markup to use effectively.</p>
+    </div>
+<div class="card-reveal">
+  <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+  <p>Here is some more information about this product that is only revealed once clicked on.</p>
+</div>
+    <div class="card-action">
+      <a href="#">This is a link</a>
+    </div>
+</div>
+
+
+   </div>
+
+    
+ 
+</div>
+
+
 
     
  
@@ -109,15 +140,14 @@
 
 
 
-  </div>
+  
 
-    </div>
+   
+</div>
+  
 
 </div>
-       </div>
-
-
-       
+   </div>
 <div>
 <h4 class="tags">News</h4>
 </div>
@@ -127,6 +157,7 @@
       
 
 </div>
+
 </main> 
 
 <footer class="page-footer grey darken-1 ">
@@ -148,6 +179,7 @@
         </div>
       </div>
     </div>
+
     <div class="footer-copyright">
       <div class="container">
       © 2020 Copyright Text

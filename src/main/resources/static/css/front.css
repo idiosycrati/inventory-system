@@ -11,6 +11,16 @@
     /* display: kk !important; */
     margin-right: 3% !important;
   }
+  /* .card.medium{ */
+    .card-image{
+     max-height:100%; 
+      height:300px;
+     /* img{height:300px;} */
+     background-size: cover;
+background-position: center;
+
+     } 
+   /* } */
  .content{
 
     /* height: 100% !importanti; */

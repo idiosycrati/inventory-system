@@ -72,7 +72,9 @@ public class MainController{
             List<TheCart>cart = systemServiceImplementation.cartList(principal.getName());
             model.addAttribute("cart", cart);
         }
+        log.info(products.size()+"products count");;
         model.addAttribute("products",products);
+        // model.addAttribute("pro", attributeValue)
         model.addAttribute("posts", posts);
         return "index";
 

@@ -66,7 +66,9 @@ function updateProductList(myid)
     			})
     		}
 	</script>
-	<div sec:authorize="hasRole('ADMIN')">Text visible to admin inventory shit
+
+	<!-- <div sec:authorize="hasRole('ADMIN')">Text visible to admin inventory shit -->
+
         <center>
 			<div class="table-responsive " >
 	<table id="productList">
@@ -222,6 +224,8 @@ function updateProductList(myid)
 		<form th:action="@{/logout}" method="post">
 		<button type="submit" class="btn btn-success">Logout</button>
 	</form>
-		</div>
+
+		<!-- </div> -->
+		
 </body>
 </html>
