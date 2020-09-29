@@ -17,6 +17,8 @@ import javax.persistence.Table;
 @Table(name="cart")
 public class CartEntity {
 
+    // TODO: ADD "ENABLED" ATTRIBUTE
+    
 @Id
 @GeneratedValue(strategy=GenerationType.IDENTITY)
 @Column(name="id")

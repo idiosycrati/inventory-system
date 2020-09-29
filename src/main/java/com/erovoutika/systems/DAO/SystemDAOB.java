@@ -160,7 +160,7 @@ public class SystemDAOB implements SystemDAO {
     
     @Override
     @Transactional
-    public void updateCart(String email, int id,int quantity) {
+    public void addToCart(String email, int id,int quantity) {
 
         Session currentSession = entityManager.unwrap(Session.class);
         userModel theUser = findUserByEmail(email);
@@ -228,20 +228,20 @@ public class SystemDAOB implements SystemDAO {
         String temp = UUID.randomUUID().toString();
         userModel user = findUserByEmail(pr.getName());
         int price;
-        List<TheCart> theCart = cartList(pr.getName());
+        List<CartEntity> theCart = cartList(pr.getName());
     
         log.error(theCart.size()+" cartsize");
-        for (TheCart theProduct : theCart) {
+        for (CartEntity theProduct : theCart) {
             OrderEntity theOrder = new OrderEntity();
-            products product = findProductById(theProduct.getId());
-            price = product.getProductPrice() * theProduct.getOrderQuantity();
+            // products product = findProductById(theProduct.getId());
+            price = theProduct.getProductId().getProductPrice() * theProduct.getOrderQuantity();
             theOrder.setOrderId(0);
             theOrder.setUuID(temp);
             log.error(theProduct.getOrderQuantity()+" orderQuant");
             theOrder.setOrderQuantity(theProduct.getOrderQuantity());
             theOrder.setPrice(price);
             theOrder.setUserId(user);
-            theOrder.setProductId(product);
+            theOrder.setProductId(theProduct.getProductId());
             currentSession.saveOrUpdate(theOrder);
         }
         String hql = "DELETE FROM CartEntity WHERE userId = :theId";

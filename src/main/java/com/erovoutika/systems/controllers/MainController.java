@@ -72,7 +72,7 @@ public class MainController{
             List<CartEntity>cart = systemServiceImplementation.cartList(principal.getName());
             model.addAttribute("cart", cart);
             for (CartEntity cartEntity : cart) {
-                cartEntity.getProductId().getProductDescription();
+                // cartEntity.getProductId().
                 // log.info(cartEntity.+"tanginangyan");
             }
             
@@ -178,6 +178,8 @@ return "redirect:/login";
 		return "redirect:/dashboard";			
     }
     
+
+    // TODO: COULD SEPARATE ADD TO CART AND UPDATE CART FUNCTION
     @GetMapping("/addToCart")
 	public String addToCart(
         @RequestParam("productId") int theId,
@@ -185,7 +187,7 @@ return "redirect:/login";
         Model theModel
         ,Principal pr) {
         log.error(theId+" product Id");
-        systemServiceImplementation.updateCart(pr.getName(), theId,productQuantity);
+        systemServiceImplementation.addToCart(pr.getName(), theId,productQuantity);
         List<CartEntity>cart = systemServiceImplementation.cartList(pr.getName());
         theModel.addAttribute("cart", cart);
 

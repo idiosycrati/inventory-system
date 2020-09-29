@@ -85,9 +85,9 @@ public class SystemServiceImplementation implements SystemDAO {
     }
 
     @Override
-    public void updateCart(String email, int id,int quantity) {
+    public void addToCart(String email, int id,int quantity) {
         // TODO Auto-generated method stub
-        systemDAO.updateCart(email, id,quantity);
+        systemDAO.addToCart(email, id,quantity);
     }
 
     @Override

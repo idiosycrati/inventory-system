@@ -31,7 +31,7 @@ public interface SystemDAO  {
     public void productDeleteById(int theId);
 
     // Cart DAO's
-    public void updateCart(String email,int id,int quantity);
+    public void addToCart(String email,int id,int quantity);
     public List<CartEntity> cartList(String email);
     public void order(int quantity,int productId, String email);
     public void cOrder(Principal pr);
