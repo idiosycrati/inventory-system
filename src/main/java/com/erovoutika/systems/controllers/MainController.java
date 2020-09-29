@@ -187,9 +187,9 @@ return "redirect:/login";
         log.error(theId+" product Id");
         systemServiceImplementation.updateCart(pr.getName(), theId,productQuantity);
         List<CartEntity>cart = systemServiceImplementation.cartList(pr.getName());
-        theModel.addAttribute("thecart", cart);
+        theModel.addAttribute("cart", cart);
 
-		return "index  :: #cartList";			
+		return "index  :: #nav-mobile";			
     }
 
 

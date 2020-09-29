@@ -47,7 +47,7 @@
 
 
  <script>
-  $(".dropdown-trigger").dropdown();
+  // $(".dropdown-trigger").dropdown();
 
   //  <script>
         function addToCart(productId)
@@ -58,7 +58,7 @@
     			  type: 'get',
     			  url: "addToCart?productId="+productId+"&productQuantity="+quantity,
     			  success: function(data){
-    				  $('#cartList').html(data);
+    				  $('#nav-mobile').html(data);
     				},
     			})	
     		}
@@ -96,7 +96,7 @@
         <!-- <li><a href="sass.html">Sass</a></li> -->
         <!-- <li><a href="badges.html">Components</a></li> -->
         <!-- <span th:if="${#authentication.name != 'anonymousUser'}">Not Logged In -->
-        <li><a href="#">Cart<span class="badge white-text" th:if="${#authentication.name != 'anonymousUser'}" th:text="${#lists.size(cart)}"> </span></a></li>
+        <li><a href="#">Cart<span  class="badge white-text" th:if="${#authentication.name != 'anonymousUser'}" th:text="${#lists.size(cart)}"> </span></a></li>
      
       </ul>
     </div>
