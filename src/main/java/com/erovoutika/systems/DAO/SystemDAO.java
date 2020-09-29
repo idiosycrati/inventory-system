@@ -32,7 +32,7 @@ public interface SystemDAO  {
 
     // Cart DAO's
     public void updateCart(String email,int id,int quantity);
-    public List<TheCart> cartList(String email);
+    public List<CartEntity> cartList(String email);
     public void order(int quantity,int productId, String email);
     public void cOrder(Principal pr);
     public boolean existInCart(int productId);

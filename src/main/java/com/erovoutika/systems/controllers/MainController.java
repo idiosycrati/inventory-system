@@ -68,9 +68,14 @@ public class MainController{
     public String index(Model model,Principal principal){
         List<products> products = systemServiceImplementation.findAllProducts();
         List<PostEntity> posts = systemServiceImplementation.findAllPost();
-        if (principal!=null) {
-            List<TheCart>cart = systemServiceImplementation.cartList(principal.getName());
+               if (principal!=null) {
+            List<CartEntity>cart = systemServiceImplementation.cartList(principal.getName());
             model.addAttribute("cart", cart);
+            for (CartEntity cartEntity : cart) {
+                cartEntity.getProductId().getProductDescription();
+                // log.info(cartEntity.+"tanginangyan");
+            }
+            
         }
         log.info(products.size()+"products count");;
         model.addAttribute("products",products);
@@ -181,7 +186,7 @@ return "redirect:/login";
         ,Principal pr) {
         log.error(theId+" product Id");
         systemServiceImplementation.updateCart(pr.getName(), theId,productQuantity);
-        List<TheCart>cart = systemServiceImplementation.cartList(pr.getName());
+        List<CartEntity>cart = systemServiceImplementation.cartList(pr.getName());
         theModel.addAttribute("thecart", cart);
 
 		return "index  :: #cartList";			

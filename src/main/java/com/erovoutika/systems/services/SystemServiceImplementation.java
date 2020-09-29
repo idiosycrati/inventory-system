@@ -91,7 +91,7 @@ public class SystemServiceImplementation implements SystemDAO {
     }
 
     @Override
-    public List<TheCart> cartList(String email) {
+    public List<CartEntity> cartList(String email) {
         // TODO Auto-generated method stub
         return systemDAO.cartList(email);
     }

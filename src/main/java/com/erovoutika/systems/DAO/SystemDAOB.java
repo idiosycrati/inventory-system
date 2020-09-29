@@ -186,16 +186,16 @@ public class SystemDAOB implements SystemDAO {
 
     @Override
     @Transactional
-    public List<TheCart> cartList(String email) {
+    public List<CartEntity> cartList(String email) {
         userModel theUser = findUserByEmail(email);
         // TODO Auto-generated method stub
         Session currentSession = entityManager.unwrap(Session.class);
         // Query<CartEntity> query = currentSession.createQuery("productId from
         // CartEntity where userId= :theId");
-        Query<TheCart> query = currentSession.createQuery(" from TheCart where userId= :theId");
+        Query<CartEntity> query = currentSession.createQuery(" from CartEntity where userId= :theId");
         log.info("adding: " + email);
-        query.setParameter("theId", theUser.getId());
-        List<TheCart> productList = query.getResultList();
+        query.setParameter("theId", theUser);
+        List<CartEntity> productList = query.getResultList();
         log.info(String.valueOf(productList.size()));
         return productList;
     }
