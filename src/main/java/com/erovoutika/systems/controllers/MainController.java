@@ -200,7 +200,7 @@ return "redirect:/login";
 
         Model theModel,Principal pr) {
 
-        systemServiceImplementation.cOrder(pr);
+        systemServiceImplementation.cartCustomerOrder(pr);
 		return "redirect:/";			
     }
     @PostMapping("/createSchedule")

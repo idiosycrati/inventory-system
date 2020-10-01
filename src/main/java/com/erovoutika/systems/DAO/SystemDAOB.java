@@ -221,7 +221,7 @@ public class SystemDAOB implements SystemDAO {
 
     @Override
     @Transactional
-    public void cOrder(Principal pr) {
+    public void cartCustomerOrder(Principal pr) {
         Session currentSession = entityManager.unwrap(Session.class);
         
         UUID idOne = UUID.randomUUID();

@@ -103,9 +103,9 @@ public class SystemServiceImplementation implements SystemDAO {
     }
 
     @Override
-    public void cOrder(Principal pr) {
+    public void cartCustomerOrder(Principal pr) {
         // TODO Auto-generated method stub
-        systemDAO.cOrder(pr);
+        systemDAO.cartCustomerOrder(pr);
     }
 
     @Override
