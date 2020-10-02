@@ -95,6 +95,7 @@ public class SystemDAOB implements SystemDAO {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        product.setEnabled(1);
         currentSession.saveOrUpdate(product);
 
     }
@@ -105,7 +106,7 @@ public class SystemDAOB implements SystemDAO {
     public List<products> findAllProducts() {
 
         Session currentSession = entityManager.unwrap(Session.class);
-        Query<products> query = currentSession.createQuery("from products");
+        Query<products> query = currentSession.createQuery("from products where enabled=1");
         List<products> productList = query.getResultList();
         log.error(productList.toString());
         return productList;
@@ -233,7 +234,7 @@ public class SystemDAOB implements SystemDAO {
         log.error(theCart.size()+" cartsize");
         for (CartEntity theProduct : theCart) {
             OrderEntity theOrder = new OrderEntity();
-            // products product = findProductById(theProduct.getId());
+            products product = findProductById(theProduct.getProductId().getId());
             price = theProduct.getProductId().getProductPrice() * theProduct.getOrderQuantity();
             theOrder.setOrderId(0);
             theOrder.setUuID(temp);
@@ -242,6 +243,10 @@ public class SystemDAOB implements SystemDAO {
             theOrder.setPrice(price);
             theOrder.setUserId(user);
             theOrder.setProductId(theProduct.getProductId());
+
+            product.setId(product.getId());
+            product.setRemainingQuantity(product.getRemainingQuantity()- theProduct.getOrderQuantity());
+            currentSession.save(product);
             currentSession.saveOrUpdate(theOrder);
         }
         String hql = "DELETE FROM CartEntity WHERE userId = :theId";

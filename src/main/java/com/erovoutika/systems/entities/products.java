@@ -34,6 +34,17 @@ public class products {
     @Column(name="productImageLocation")
     private String productImageLocation;
 
+    @Column(name="enabled")
+    private int enabled;
+
+    public int getEnablded() {
+        return this.enabled;
+    }
+
+    public void setEnabled(int enabled) {
+        this.enabled = enabled;
+    }
+
     public String getProductImageLocation() {
         return this.productImageLocation;
     }

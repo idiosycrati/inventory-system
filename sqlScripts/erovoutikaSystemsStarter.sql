@@ -35,8 +35,9 @@ CREATE TABLE `products` (
   `productName` varchar(128) NOT NULL,
   `remainingQuantity` int(20) NOT NULL ,
   `productPrice` int(20) NOT NULL,
-  `productImageLocation` varchar(128) NOT NULL
-  -- `enabled` tinyint(1) NOT NULL 
+  `productImageLocation` varchar(128) NOT NULL,
+  `enabled` tinyint(1) NOT NULL
+
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS `cart`;
