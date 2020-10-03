@@ -11,10 +11,9 @@ import com.erovoutika.systems.DAO.imageDAO;
 import com.erovoutika.systems.entities.CartEntity;
 import com.erovoutika.systems.entities.ImageEntity;
 import com.erovoutika.systems.entities.PostEntity;
+import com.erovoutika.systems.entities.Products;
 import com.erovoutika.systems.entities.ScheduleEntity;
-import com.erovoutika.systems.entities.TheCart;
-import com.erovoutika.systems.entities.products;
-import com.erovoutika.systems.entities.userModel;
+import com.erovoutika.systems.entities.UserEntity;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,14 +35,14 @@ public class SystemServiceImplementation implements SystemDAO {
     }
 
     @Override
-    public void saveUser(userModel user) {
+    public void saveUser(UserEntity user) {
         // TODO Auto-generated method stub
         systemDAO.saveUser(user);
 
     }
 
     @Override
-    public void saveProduct(MultipartFile imageFile, products product) {
+    public void saveProduct(MultipartFile imageFile,Products product) {
         try {
             systemDAO.saveProduct(imageFile, product);
         } catch (Exception e) {
@@ -54,13 +53,13 @@ public class SystemServiceImplementation implements SystemDAO {
     }
 
     @Override
-    public boolean isUserExist(userModel user) {
+    public boolean isUserExist(UserEntity user) {
         // TODO Auto-generated method stub
         return false;
     }
 
     @Override
-    public List<products> findAllProducts() {
+    public List<Products> findAllProducts() {
         // TODO Auto-generated method stub
         return systemDAO.findAllProducts();
     }
@@ -72,14 +71,14 @@ public class SystemServiceImplementation implements SystemDAO {
     }
 
     @Override
-    public products findProductById(int theId) {
+    public Products findProductById(int theId) {
         // TODO Auto-generated method stub
         return systemDAO.findProductById(theId);
         
     }
 
     @Override
-    public userModel findUserByEmail(String email) {
+    public UserEntity findUserByEmail(String email) {
         // TODO Auto-generated method stub
         return null;
     }

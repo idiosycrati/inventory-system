@@ -9,7 +9,7 @@ import com.erovoutika.systems.entities.Products;
 import com.erovoutika.systems.entities.ScheduleEntity;
 // import com.erovoutika.systems.entities.TheCart;
 // import com.erovoutika.systems.entities.products;
-import com.erovoutika.systems.entities.userModel;
+import com.erovoutika.systems.entities.UserEntity;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,9 +20,9 @@ import org.springframework.web.multipart.MultipartFile;
 public interface SystemDAO  {
 
     // Users DAO's
-    public void saveUser(userModel user);
-    public boolean isUserExist(userModel user);
-    public userModel findUserByEmail(String email);
+    public void saveUser(UserEntity user);
+    public boolean isUserExist(UserEntity user);
+    public UserEntity findUserByEmail(String email);
 
 
     // Product DAO's

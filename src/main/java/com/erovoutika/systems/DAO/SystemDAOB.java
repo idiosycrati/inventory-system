@@ -18,7 +18,7 @@ import com.erovoutika.systems.entities.Products;
 import com.erovoutika.systems.entities.ScheduleEntity;
 // import com.erovoutika.systems.entities.TheCart;
 // import com.erovoutika.systems.entities.products;
-import com.erovoutika.systems.entities.userModel;
+import com.erovoutika.systems.entities.UserEntity;
 import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,7 +46,7 @@ public class SystemDAOB implements SystemDAO {
 
     @Override
     @Transactional
-    public void saveUser(userModel user) {
+    public void saveUser(UserEntity user) {
 
         // get the current hibernate session
         Session currentSession = entityManager.unwrap(Session.class);
@@ -64,7 +64,7 @@ public class SystemDAOB implements SystemDAO {
 
     @Override
     @Transactional
-    public boolean isUserExist(userModel user) {
+    public boolean isUserExist(UserEntity user) {
         // TODO Auto-ge final Logger log =
         // LoggerFactory.getLogger(SystemsApplication.class);ession =
         // entityManager.unwrap(Session.class);
@@ -145,13 +145,13 @@ public class SystemDAOB implements SystemDAO {
 
     @Override
     @Transactional
-    public userModel findUserByEmail(String email) {
+    public UserEntity findUserByEmail(String email) {
 
         Session currentSession = entityManager.unwrap(Session.class);
-        Query<userModel> query = currentSession.createQuery("from userModel where email= :email");
+        Query<UserEntity> query = currentSession.createQuery("from userModel where email= :email");
         log.info("adding: " + email);
         query.setParameter("email", email);
-        userModel user = query.getSingleResult();
+        UserEntity user = query.getSingleResult();
         return user;
     }
 
@@ -165,7 +165,7 @@ public class SystemDAOB implements SystemDAO {
     public void addToCart(String email, int id,int quantity) {
 
         Session currentSession = entityManager.unwrap(Session.class);
-        userModel theUser = findUserByEmail(email);
+        UserEntity theUser = findUserByEmail(email);
         Products theProduct = findProductById(id);
 
         // FIXME: FETCH CART OF THE SPECIFIC USER NOT THE CART AS A WHOLE
@@ -189,7 +189,7 @@ public class SystemDAOB implements SystemDAO {
     @Override
     @Transactional
     public List<CartEntity> cartList(String email) {
-        userModel theUser = findUserByEmail(email);
+        UserEntity theUser = findUserByEmail(email);
         // TODO Auto-generated method stub
         Session currentSession = entityManager.unwrap(Session.class);
         // Query<CartEntity> query = currentSession.createQuery("productId from
@@ -210,7 +210,7 @@ public class SystemDAOB implements SystemDAO {
         Session currentSession = entityManager.unwrap(Session.class);
         OrderEntity theOrder = new OrderEntity();
         Products product = findProductById(productId);
-        userModel user = findUserByEmail(email);
+        UserEntity user = findUserByEmail(email);
         price = product.getProductPrice() * quantity;
         theOrder.setUuID(UUID.randomUUID().toString());
         theOrder.setOrderQuantity(quantity);
@@ -228,7 +228,7 @@ public class SystemDAOB implements SystemDAO {
         
         UUID idOne = UUID.randomUUID();
         String temp = UUID.randomUUID().toString();
-        userModel user = findUserByEmail(pr.getName());
+        UserEntity user = findUserByEmail(pr.getName());
         int price;
         List<CartEntity> theCart = cartList(pr.getName());
     

@@ -26,13 +26,13 @@ private int id;
 
 @OneToOne(cascade = CascadeType.ALL)
 @JoinColumn(name="productId")
-private products productId;
+private Products productId;
 
-public products getProductId() {
+public Products getProductId() {
     return this.productId;
 }
 
-public void setProductId(products productId) {
+public void setProductId(Products productId) {
     this.productId = productId;
 }
 
@@ -41,13 +41,13 @@ private int orderQuantity;
 
 @OneToOne(cascade = CascadeType.ALL)
 @JoinColumn(name="userId")
-private userModel userId;
+private UserEntity userId;
 
-public userModel getUserId() {
+public UserEntity getUserId() {
     return this.userId;
 }
 
-public void setUserId(userModel userId) {
+public void setUserId(UserEntity userId) {
     this.userId = userId;
 }
 

@@ -8,10 +8,11 @@ import com.erovoutika.systems.SystemsApplication;
 import com.erovoutika.systems.entities.Authorities;
 import com.erovoutika.systems.entities.CartEntity;
 import com.erovoutika.systems.entities.PostEntity;
+import com.erovoutika.systems.entities.Products;
 import com.erovoutika.systems.entities.ScheduleEntity;
 // import com.erovoutika.systems.entities.TheCart;
-import com.erovoutika.systems.entities.products;
-import com.erovoutika.systems.entities.userModel;
+// import com.erovoutika.systems.entities.products;
+import com.erovoutika.systems.entities.UserEntity;
 import com.erovoutika.systems.services.SystemServiceImplementation;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.aspectj.lang.annotation.RequiredTypes;
@@ -146,7 +147,7 @@ public class MainController{
 //TODO: PUT CODES IN SERVICE LAYER
  
     @PostMapping("/register")
-	public String addEmployee(@ModelAttribute("user") @Valid final userModel user, final ModelMap model, final BindingResult result) {
+	public String addEmployee(@ModelAttribute("user") @Valid final UserEntity user, final ModelMap model, final BindingResult result) {
         model.addAttribute("user", user);
         try {
     user.setId(0);

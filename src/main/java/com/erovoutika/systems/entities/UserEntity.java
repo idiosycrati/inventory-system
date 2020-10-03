@@ -27,7 +27,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  */
 @Entity
 @Table(name="users")
-public class userModel {
+public class UserEntity {
     private static final Logger log = LoggerFactory.getLogger(SystemsApplication.class);
     // @GeneratedValue(strategy=GenerationType.IDENTITY)
 
@@ -98,12 +98,12 @@ public class userModel {
         this.password = password;
     }
 
-    public userModel(){
+    public UserEntity(){
 
         
     }
   
-    public userModel(String email, String password) {
+    public UserEntity(String email, String password) {
         this.email=email;
         this.password=password;
     }

@@ -31,7 +31,7 @@ public class OrderEntity {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="productId")
-    private products productId;
+    private Products productId;
 
     @Column(name="orderQuantity")
     private int orderQuantity;
@@ -42,7 +42,7 @@ public class OrderEntity {
  
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="userId")
-    private userModel userId;
+    private UserEntity userId;
 
     public int getOrderId() {
         return this.orderId;
@@ -69,11 +69,11 @@ public class OrderEntity {
         this.uuid = uuID;
     }
 
-    public products getProductId() {
+    public Products getProductId() {
         return this.productId;
     }
 
-    public void setProductId(products productId) {
+    public void setProductId(Products productId) {
         this.productId = productId;
     }
 
@@ -87,11 +87,11 @@ public class OrderEntity {
 
    
 
-    public userModel getUserId() {
+    public UserEntity getUserId() {
         return this.userId;
     }
 
-    public void setUserId(userModel userId) {
+    public void setUserId(UserEntity userId) {
         this.userId = userId;
     }
     public OrderEntity(){
