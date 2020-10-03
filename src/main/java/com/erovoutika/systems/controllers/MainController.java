@@ -5,11 +5,11 @@ import java.util.List;
 import java.util.UUID;
 import javax.validation.Valid;
 import com.erovoutika.systems.SystemsApplication;
+import com.erovoutika.systems.entities.Authorities;
 import com.erovoutika.systems.entities.CartEntity;
 import com.erovoutika.systems.entities.PostEntity;
 import com.erovoutika.systems.entities.ScheduleEntity;
-import com.erovoutika.systems.entities.TheCart;
-import com.erovoutika.systems.entities.authorities;
+// import com.erovoutika.systems.entities.TheCart;
 import com.erovoutika.systems.entities.products;
 import com.erovoutika.systems.entities.userModel;
 import com.erovoutika.systems.services.SystemServiceImplementation;
@@ -66,7 +66,7 @@ public class MainController{
     }
     @RequestMapping("/")
     public String index(Model model,Principal principal){
-        List<products> products = systemServiceImplementation.findAllProducts();
+        List<Products> products = systemServiceImplementation.findAllProducts();
         List<PostEntity> posts = systemServiceImplementation.findAllPost();
                if (principal!=null) {
             List<CartEntity>cart = systemServiceImplementation.cartList(principal.getName());
@@ -99,7 +99,7 @@ public class MainController{
     
     @RequestMapping(value="/dashboard", method={RequestMethod.POST,RequestMethod.GET})
     public String dashboard(Model model){
-        List<products> products = systemServiceImplementation.findAllProducts();
+        List<Products> products = systemServiceImplementation.findAllProducts();
         List<PostEntity> posts = systemServiceImplementation.findAllPost();
         model.addAttribute("product",products);
         model.addAttribute("schedule", new ScheduleEntity());
@@ -109,7 +109,7 @@ public class MainController{
 
     @RequestMapping(value="/inventory", method={RequestMethod.POST,RequestMethod.GET})
     public String inventory(Model model){
-        List<products> products = systemServiceImplementation.findAllProducts();
+        List<Products> products = systemServiceImplementation.findAllProducts();
         List<PostEntity> posts = systemServiceImplementation.findAllPost();
         model.addAttribute("products",products);
         model.addAttribute("schedule", new ScheduleEntity());
@@ -119,7 +119,7 @@ public class MainController{
 // TODO: PUT CODES IN SERVICE LAYER
 
 @PostMapping("/addProduct")
-    public String addProduct(@Valid products product,@RequestParam("imageFile") MultipartFile imageFile,Model model){
+    public String addProduct(@Valid Products product,@RequestParam("imageFile") MultipartFile imageFile,Model model){
         product.setId(0);
         try {
           log.error((imageFile.getContentType()).toString());
@@ -151,7 +151,7 @@ public class MainController{
         try {
     user.setId(0);
     user.setEnabled(1);
-    authorities auth = new authorities();
+    Authorities auth = new Authorities();
     auth.setAuthority("ROLE_USER");
     auth.setEmail(user.getEmail());
     log.error(user.getPassword());
@@ -255,7 +255,7 @@ return "redirect:/login";
         @RequestParam("productId") int theId,
                                     Model theModel
                                     ) {
-     products result = systemServiceImplementation.findProductById(theId);
+     Products result = systemServiceImplementation.findProductById(theId);
               
      return new ResponseEntity<>(result,HttpStatus.OK);
                                       
@@ -269,7 +269,7 @@ return "redirect:/login";
                                     Model theModel
                                     ) {
  
-     List<products> products = systemServiceImplementation.findAllProducts();
+     List<Products> products = systemServiceImplementation.findAllProducts();
 
     theModel.addAttribute("product", products);   
      return "dashboard  :: #productList";
@@ -278,7 +278,7 @@ return "redirect:/login";
 
     @RequestMapping(value="/products", method={RequestMethod.POST,RequestMethod.GET})
     public String products(Model model){
-        List<products> prod = systemServiceImplementation.findAllProducts();
+        List<Products> prod = systemServiceImplementation.findAllProducts();
         List<PostEntity> posts = systemServiceImplementation.findAllPost();
         model.addAttribute("product",prod);
         model.addAttribute("schedule", new ScheduleEntity());

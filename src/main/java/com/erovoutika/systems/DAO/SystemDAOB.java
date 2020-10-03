@@ -14,9 +14,10 @@ import com.erovoutika.systems.SystemsApplication;
 import com.erovoutika.systems.entities.CartEntity;
 import com.erovoutika.systems.entities.OrderEntity;
 import com.erovoutika.systems.entities.PostEntity;
+import com.erovoutika.systems.entities.Products;
 import com.erovoutika.systems.entities.ScheduleEntity;
-import com.erovoutika.systems.entities.TheCart;
-import com.erovoutika.systems.entities.products;
+// import com.erovoutika.systems.entities.TheCart;
+// import com.erovoutika.systems.entities.products;
 import com.erovoutika.systems.entities.userModel;
 import org.hibernate.query.Query;
 import org.slf4j.Logger;
@@ -78,7 +79,7 @@ public class SystemDAOB implements SystemDAO {
 
     @Override
     @Transactional
-    public void saveProduct(MultipartFile imageFile, products product) {
+    public void saveProduct(MultipartFile imageFile, Products product) {
         Session currentSession = entityManager.unwrap(Session.class);
         final Logger log = LoggerFactory.getLogger(SystemsApplication.class);
         Path currentPath = Paths.get("home");
@@ -103,11 +104,11 @@ public class SystemDAOB implements SystemDAO {
 
     @Override
     @Transactional
-    public List<products> findAllProducts() {
+    public List<Products> findAllProducts() {
 
         Session currentSession = entityManager.unwrap(Session.class);
-        Query<products> query = currentSession.createQuery("from products where enabled=1");
-        List<products> productList = query.getResultList();
+        Query<Products> query = currentSession.createQuery("from products where enabled=1");
+        List<Products> productList = query.getResultList();
         log.error(productList.toString());
         return productList;
 
@@ -115,11 +116,11 @@ public class SystemDAOB implements SystemDAO {
 
     @Override
     @Transactional
-    public products findProductById(int theId) {
+    public Products findProductById(int theId) {
 
         Session currentSession = entityManager.unwrap(Session.class);
-        Query<products> query = currentSession.createQuery("from products where id=" + theId);
-        products theProduct = query.getSingleResult();
+        Query<Products> query = currentSession.createQuery("from products where id=" + theId);
+        Products theProduct = query.getSingleResult();
         log.error("found "+theProduct.getProductDescription());
         return theProduct;
     }
@@ -165,7 +166,7 @@ public class SystemDAOB implements SystemDAO {
 
         Session currentSession = entityManager.unwrap(Session.class);
         userModel theUser = findUserByEmail(email);
-        products theProduct = findProductById(id);
+        Products theProduct = findProductById(id);
 
         // FIXME: FETCH CART OF THE SPECIFIC USER NOT THE CART AS A WHOLE
 
@@ -208,7 +209,7 @@ public class SystemDAOB implements SystemDAO {
         int price;
         Session currentSession = entityManager.unwrap(Session.class);
         OrderEntity theOrder = new OrderEntity();
-        products product = findProductById(productId);
+        Products product = findProductById(productId);
         userModel user = findUserByEmail(email);
         price = product.getProductPrice() * quantity;
         theOrder.setUuID(UUID.randomUUID().toString());
@@ -234,7 +235,7 @@ public class SystemDAOB implements SystemDAO {
         log.error(theCart.size()+" cartsize");
         for (CartEntity theProduct : theCart) {
             OrderEntity theOrder = new OrderEntity();
-            products product = findProductById(theProduct.getProductId().getId());
+            Products product = findProductById(theProduct.getProductId().getId());
             price = theProduct.getProductId().getProductPrice() * theProduct.getOrderQuantity();
             theOrder.setOrderId(0);
             theOrder.setUuID(temp);
@@ -303,7 +304,7 @@ public class SystemDAOB implements SystemDAO {
     public boolean existInCart(int productId) {
         // TODO Auto-generated method stub
         Session currentSession = entityManager.unwrap(Session.class);
-        Query<products> query = currentSession.createQuery("from CartEntity where productId= :prod");
+        Query<Products> query = currentSession.createQuery("from CartEntity where productId= :prod");
         query.setParameter("prod", findProductById(productId));
         try {
             query.getSingleResult();

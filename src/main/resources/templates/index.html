@@ -97,7 +97,7 @@
         <!-- <li><a href="badges.html">Components</a></li> -->
         <!-- <span th:if="${#authentication.name != 'anonymousUser'}">Not Logged In -->
         <li><a href="#">Cart<span  class="badge white-text" th:if="${#authentication.name != 'anonymousUser'}" th:text="${#lists.size(cart)}"> </span></a></li>
-     
+          <!-- <li th:text="${cart.Id}"></li> -->
       </ul>
     </div>
   </nav>

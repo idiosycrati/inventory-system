@@ -15,7 +15,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="authorities")
-public class authorities {
+public class Authorities {
     
 
     @Id
@@ -57,9 +57,9 @@ public class authorities {
         this.authority = authority;
     }
 
-    public authorities(){}
+    public Authorities(){}
 
-    public authorities(String email, String authority) {
+    public Authorities(String email, String authority) {
         this.email=email;
         this.authority=authority;
     }

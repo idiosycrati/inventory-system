@@ -54,7 +54,7 @@ public class userModel {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="auth_id")
-    private authorities authority;
+    private Authorities authority;
 
 
     public int getId() {
@@ -65,11 +65,11 @@ public class userModel {
         this.id = id;
     }
     
-    public authorities getAuthority() {
+    public Authorities getAuthority() {
         return this.authority;
     }
 
-    public void setAuthority(authorities authority) {
+    public void setAuthority(Authorities authority) {
         this.authority = authority;
     }
 

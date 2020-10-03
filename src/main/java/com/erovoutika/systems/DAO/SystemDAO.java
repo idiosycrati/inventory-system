@@ -5,9 +5,10 @@ import java.util.List;
 
 import com.erovoutika.systems.entities.CartEntity;
 import com.erovoutika.systems.entities.PostEntity;
+import com.erovoutika.systems.entities.Products;
 import com.erovoutika.systems.entities.ScheduleEntity;
-import com.erovoutika.systems.entities.TheCart;
-import com.erovoutika.systems.entities.products;
+// import com.erovoutika.systems.entities.TheCart;
+// import com.erovoutika.systems.entities.products;
 import com.erovoutika.systems.entities.userModel;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -25,9 +26,9 @@ public interface SystemDAO  {
 
 
     // Product DAO's
-    public void saveProduct(MultipartFile imageFile, products product) throws Exception ;
-    public List<products> findAllProducts();
-    public products findProductById(int theId);
+    public void saveProduct(MultipartFile imageFile, Products product) throws Exception ;
+    public List<Products> findAllProducts();
+    public Products findProductById(int theId);
     public void productDeleteById(int theId);
 
     // Cart DAO's

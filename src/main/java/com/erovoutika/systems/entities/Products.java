@@ -12,7 +12,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="products")
-public class products {   
+public class Products {   
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id")
@@ -94,11 +94,11 @@ public class products {
     }
 
 
-  public products(){
+  public Products(){
 
   }
 
-  public products(String productDescription,int productPrice,int remainingQuantity){
+  public Products(String productDescription,int productPrice,int remainingQuantity){
       this.productDescription=productDescription;
       this.remainingQuantity=remainingQuantity;
       this.productPrice=productPrice;
