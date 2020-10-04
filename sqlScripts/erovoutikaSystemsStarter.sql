@@ -111,7 +111,7 @@ CREATE TABLE `posts` (
 
 
 
-Create View `TheCart` as select products.id,productDescription,remainingQuantity,productPrice,productImageLocation,orderQuantity,userId from products,cart where products.id=cart.productId;
+-- Create View `TheCart` as select products.id,productDescription,remainingQuantity,productPrice,productImageLocation,orderQuantity,userId from products,cart where products.id=cart.productId;
 
 
 
